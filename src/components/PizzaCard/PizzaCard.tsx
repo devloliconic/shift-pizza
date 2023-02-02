@@ -1,4 +1,4 @@
-import { PlusOutlined, ShoppingCartOutlined } from '@ant-design/icons';
+import { CloseOutlined, PlusOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { Button, Card, Image } from 'antd';
 import React from 'react';
 
@@ -21,11 +21,21 @@ interface Props {
   id: number;
 
   onAddCLick?: (data: Order) => void;
+  onRemoveItemClick?: (id: number) => void;
 
   isMenuCard: boolean;
 }
 
-export const PizzaCard = ({ name, imagePath, ingredients, price, id, isMenuCard, onAddCLick }: Props) => {
+export const PizzaCard = ({
+  name,
+  imagePath,
+  ingredients,
+  price,
+  id,
+  isMenuCard,
+  onAddCLick,
+  onRemoveItemClick,
+}: Props) => {
   const handleAddClick = () =>
     onAddCLick && onAddCLick({ name, id, price, img: imagePath, crust: 'chees', size: 'middle' });
 
@@ -35,6 +45,7 @@ export const PizzaCard = ({ name, imagePath, ingredients, price, id, isMenuCard,
         <Title>
           {name}
           <Price>{price} ₽</Price>
+          {onRemoveItemClick && <CloseOutlined onClick={() => onRemoveItemClick(id)} />}
         </Title>
       }
     >
