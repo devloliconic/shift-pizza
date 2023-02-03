@@ -19,23 +19,11 @@ interface Props {
   ingredients?: string[];
   price: number;
   id: number;
-
   onAddCLick?: (data: Order) => void;
   onRemoveItemClick?: (id: number) => void;
-
-  isMenuCard: boolean;
 }
 
-export const PizzaCard = ({
-  name,
-  imagePath,
-  ingredients,
-  price,
-  id,
-  isMenuCard,
-  onAddCLick,
-  onRemoveItemClick,
-}: Props) => {
+export const PizzaCard = ({ name, imagePath, ingredients, price, id, onAddCLick, onRemoveItemClick }: Props) => {
   const handleAddClick = () =>
     onAddCLick && onAddCLick({ name, id, price, img: imagePath, crust: 'chees', size: 'middle' });
 
@@ -60,7 +48,7 @@ export const PizzaCard = ({
           </InfoBox>
         )}
       </CardWrapper>
-      {isMenuCard && (
+      {onAddCLick && (
         <AddToCartButton>
           <Button onClick={handleAddClick}>
             <ShoppingCartOutlined />
