@@ -1,13 +1,14 @@
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { QueryFunction, useQuery, UseQueryOptions } from 'react-query';
 
 import { Pizza } from '@/_types/pizza';
+import { http } from '@/api/http';
 
 type Response = Pizza[];
 type QueryKey = ['pizzaList'];
 
 const getPizzaList: QueryFunction<Response, QueryKey> = async () => {
-  return (await axios.get('https://shift-winter-2023-backend.onrender.com/api/pizza')).data;
+  return (await http.get('pizza')).data;
 };
 
 export const usePizzaListHook = <TData = Response>(
