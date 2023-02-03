@@ -22,3 +22,9 @@ export type Pizza = {
     vegetarian: boolean;
   }; //Дима напиши нормальную схему пж
 };
+
+export type OrderPizza = {
+  id: number;
+  size: string;
+  crust: string;
+};
