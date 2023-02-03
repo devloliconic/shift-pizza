@@ -32,15 +32,14 @@ export const MenuPage = () => {
     <Layout>
       <Menu>
         {pizzaList
-          ? pizzaList.map((it) => (
+          ? pizzaList.map((pizza) => (
               <PizzaCard
-                id={it.id}
-                name={it.name}
-                key={it.id}
-                imagePath={it.img}
-                ingredients={it.ingredients}
-                price={it.price.default}
-                isMenuCard={true}
+                id={pizza.id}
+                name={pizza.name}
+                key={pizza.id}
+                imagePath={pizza.img}
+                ingredients={pizza.ingredients}
+                price={pizza.price.default}
                 onAddCLick={handleAddToCardClick}
               />
             ))
