@@ -2,20 +2,18 @@ import { Button, Result } from 'antd';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { CreateOrderModal } from '@/Modals/CreateOrderModal';
 import { Layout } from '@/components/Layout';
 import { PizzaCard } from '@/components/PizzaCard';
+import { CreateOrderModal } from '@/modals/CreateOrderModal';
 import { InfoSection, OrderList, TotalPrice } from '@/pages/CheckoutPage/styled';
 import { useOrderStore } from '@/store/useOrderStore';
 
 export const CheckoutPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const { orders, deletePosition: removeItem } = useOrderStore((state) => state);
 
   const navigate = useNavigate();
 
-  const orders = useOrderStore((state) => state.orders);
-
-  const removeItem = useOrderStore((state) => state.deletePosition);
   const handleRemoveItem = (id: number) => {
     removeItem(id);
   };
@@ -33,14 +31,13 @@ export const CheckoutPage = () => {
   return (
     <Layout>
       <OrderList>
-        {orders.map((it) => (
+        {orders.map((pizza) => (
           <PizzaCard
-            name={it.name}
-            imagePath={it.img}
-            price={it.price}
-            id={it.id}
-            isMenuCard={false}
-            key={it.id}
+            name={pizza.name}
+            imagePath={pizza.img}
+            price={pizza.price}
+            id={pizza.id}
+            key={pizza.id}
             onRemoveItemClick={handleRemoveItem}
           />
         ))}
